@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axiosWithAuth from '../components/utils/axiosWithAuth'
+import axios from 'axios'
 
 const initialColor = {
   color: "",
@@ -18,11 +18,11 @@ const ColorList = ({ colors, updateColors }) => {
 
   const saveEdit = e => {
     e.preventDefault();
-    axiosWithAuth()
-    .put(`/colors/${id}`, colorToEdit)
+    axios
+    .put(`http://localhost:5000/api/colors/${id}`, colorToEdit)
     .then(res => {
-      props.setColorToEdit([res.data]);
-      props.history.push(`/bubbles/${id}`);
+      updateColors.setColorToEdit([res.data]);
+      colors.history.push('/');
     })
     .catch(err => {
       console.log('error', err)
@@ -31,11 +31,11 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
    color.preventDefault();
-    axiosWithAuth()
-    .delete (`/colors/${id}`)
+    axios
+    .delete(`http://localhost:5000/api/colors/${id}`)
     .then(res => {
       console.log(res)
-      props.history.push('/')
+      updateColors.history.push('/')
     })
     .catch(err => console.log('error', err))
   };

@@ -20,7 +20,8 @@ const Login = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    axiosWithAuth.post('/login', login)
+    axiosWithAuth
+    .post('/login', login)
     .then(res => {
       localStorage.setItem('token', res.data.payload);
       history.push('/colors')
